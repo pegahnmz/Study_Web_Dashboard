@@ -253,24 +253,28 @@ function loadActive(){
         }
    },speed)
 }
-for(let i =0 ;i<progressbar.length ; i++){
-    let progressVal = 0;
-    let progressEndVal=progressValue[i].textContent;
-    let speed = 10;
-    let progress = setInterval( () => {
-        progressVal++;
-        progressValue[i].textContent = `${progressVal}%`;
-        
-        progressbar[i].style.background = `conic-gradient(
-            var(--full-color) ${progressVal * 3.6}deg,
-            var(--last-color) ${progressVal * 3.6}deg
-        )`
-        progressbarActive.style.background = `conic-gradient(
-            var(--full-color) ${progressVal * 3.6}deg,
-            var(--last-color) ${progressVal * 3.6}deg
-        )`
-        if(progressVal == progressEndVal){
-            clearInterval(progress)
-        }
-   },speed)
+function loadHw(){
+    for(let i =0 ;i<progressbar.length ; i++){
+        let progressVal = 0;
+        let progressEndVal=progressValue[i].textContent;
+        let speed = 10;
+        let progress = setInterval( () => {
+            progressVal++;
+            progressValue[i].textContent = `${progressVal}%`;
+            
+            progressbar[i].style.background = `conic-gradient(
+                var(--full-color) ${progressVal * 3.6}deg,
+                var(--last-color) ${progressVal * 3.6}deg
+            )`
+            progressbarActive.style.background = `conic-gradient(
+                var(--full-color) ${progressVal * 3.6}deg,
+                var(--last-color) ${progressVal * 3.6}deg
+            )`
+            if(progressVal == progressEndVal){
+                clearInterval(progress)
+            }
+       },speed)
+    }
 }
+setTimeout(loadHw,4050);
+
