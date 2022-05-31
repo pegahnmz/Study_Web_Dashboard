@@ -17,6 +17,7 @@
 }
 body{
     background-color: rgb(251, 252, 252);
+    --bw:50rem;
 }
 ul{
     list-style: none;
@@ -38,10 +39,10 @@ input{
 
 /* layout */
 .container{
-    padding: 1rem;
+    padding:calc(var(--bw)*0.02);
     position: relative;
    height: 100vh;
-   padding-right: 2rem;
+   padding-right: calc(var(--bw)*0.04);
   
 }
 .btn{
@@ -53,10 +54,30 @@ input{
 .main{
     display: grid;
     grid-template-columns: 1fr 3fr 1.5fr;
-    gap: 2rem;
-    padding: 0 1rem;
+    gap: calc(var(--bw)*0.04);
+    padding: 0 calc(var(--bw)*0.02);
+    overflow-x: hidden;
     
 }
+@media screen and (max-width:1600px){
+    body{
+        --bw:30rem
+    }
+}
+@media screen and (max-width:1400px){
+    body{
+        --bw:10rem
+    }
+}
+@media screen and (max-width:1280px){
+    body{
+        --bw:10rem
+    }
+    .container{
+        padding-right: 0;
+    }
+}
+ 
 @keyframes nav-top-load{
     0%{
         transform: translate(-100%);
@@ -86,25 +107,28 @@ input{
 @keyframes nav-scale{
     0%{
         opacity: 0;
-        scale: 0.5;
+        transform: scale(0.5);
+        
        
     }
     100%{
         opacity: 1;
-        scale: 1;
+        transform: scale(1);
         
     }
 }
 @keyframes scale-to-0{
     0%{
         opacity: 0;
-        scale: 1.5;
-        transform: translateX(105%);
+        
+        transform: translate(20%,20%);
+        
     }
     100%{
         opacity: 1;
-        scale: 1;
-        transform: translateX(0%);
+        transform: scale(1);
+        
+        transform: translate(0,0);
     }
 }
 @keyframes translate-bottom{
@@ -117,7 +141,50 @@ input{
         opacity: 1;
     }
 }
+@keyframes op-and-scale{
+    0%{
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@keyframes translate-right{
+    0%{
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+@keyframes scale100-to-0{
+    0%{
+        opacity: 0;
+        transform: scale(1.3);
+        
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@keyframes translate-top{
+    0%{
+        opacity: 0;
+        transform: translateY(-70%);
 
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0%);
+        
+    }
+}
+ 
 /* nav */
 .nav{
     width: 100%;
@@ -210,7 +277,7 @@ input{
     animation: nav-scale 1.2s 1.5s forwards;
     position: absolute;
     opacity: 0;
-    scale: 1.5;
+    scale: 1;
     top: -6rem;
     width: 90%;
 }
@@ -301,7 +368,7 @@ input{
 }
 .newcourses__container{
     display: grid;
-    grid-template-columns: repeat(auto-fill,14rem);
+    grid-template-columns: repeat(auto-fill,15rem);
     justify-content: space-between;
     
 }
@@ -311,6 +378,11 @@ input{
     width: 100%;
     padding:0.8rem;
     border-radius: 0.5rem;
+ 
+}
+.newcourses__box:hover{
+    cursor: pointer;
+    
     
 }
 .newcourses__box:nth-child(1){
@@ -506,16 +578,7 @@ thead tr{
     font-size: 0.8rem;
 }
 
-@keyframes op-and-scale{
-    0%{
-        opacity: 0;
-        scale: 0.95;
-    }
-    100%{
-        opacity: 1;
-        scale: 1;
-    }
-}
+
 
 /*profile*/
 .profile{
@@ -587,17 +650,11 @@ thead tr{
 
 .calendar{
    position: relative;
+   height:13rem;
+   
+  
 }
-@keyframes translate-right{
-    0%{
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    100%{
-        opacity: 1;
-        transform: translateX(0%);
-    }
-}
+
 .calendar__header{
     display: flex;
     justify-content: space-between;
@@ -702,10 +759,20 @@ thead tr{
 .event__side{
     position: absolute;
     width: 100%;
-    height: 100%;
-    bottom: 0;
-    background-color: rgb(255, 255, 255);
-    display: none;
+    height:100%;
+    top: 0;
+    background-color: rgb(251, 252, 252);
+   
+    visibility: hidden;
+    transform: translateX(100%);
+    transition-property: "transform","visibility","opacity";
+    transition: 0.5s;
+    opacity: 0;
+}
+.event__side--show{
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
 }
 .event__side *{
     font-size: 0.8rem;
@@ -714,46 +781,66 @@ thead tr{
     display: flex;
     justify-content: space-between;
 }
-.event__header__right > button{
+.event__header__right {
     font-size: 0.7rem;
     padding: 0.2rem;
-    border-radius: 5px;
-    transition: color 0.3s;
+    
 }
-.event__header__right > button:hover{
+.event__header__left{
     cursor: pointer;
-    color: rgb(205, 77, 77);
 }
+::-webkit-scrollbar{
+    display: none;
+}
+
 .event__main{
 padding: 0.5rem;
+height: 90%;
+position: relative;
+overflow: auto;
+ 
+
 }
 .event__main > input{
     background-color: transparent;
     padding-bottom: 0.5rem;
     width: 100%;
-    border-bottom: 1px solid rgb(185, 183, 183);
-    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    border-bottom: 2px solid rgb(185, 183, 183);
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+   
 }
 .event__item{
     position: relative;
+    height: fit-content;
+    margin-bottom: 1rem;
+    
+    
 }
-.event__item > input{
+.event__item > div{
     background-color: transparent;
+    margin: 0 0.5rem;
     padding-bottom: 0.3rem;
-    width: 100%;
-    border-bottom: 1px solid rgb(185, 183, 183);
+    width: 90%;
+    font-size: 0.7rem;
+    border-bottom: 0.5px solid rgba(113, 113, 113, 0.316);
+    margin-bottom: 0.5rem;
+    color: rgb(113, 113, 113);
 }
 .event__item > button{
     position: absolute;
-    right: 0;
-    bottom: 0.3rem;
+    right: 1.5rem;
+    bottom: 0.4rem;
     font-size: 0.7rem;
     transition: color 0.3s;
+    color: rgb(113, 113, 113);
 }
 .event__item > button:hover{
     cursor: pointer;
     color: rgb(205, 77, 77);
 }
+
 .toast{
     position: absolute;
     bottom: 5%;
@@ -764,6 +851,7 @@ padding: 0.5rem;
     background-color: white;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.182);
     width: fit-content;
+    visibility: hidden;
     
 }
 .toast > p{
@@ -787,28 +875,7 @@ padding: 0.5rem;
     background-color: var(--main-bg-color);
     color: snow;
 }
-@keyframes scale100-to-0{
-    0%{
-        opacity: 0;
-        scale: 1.3;
-    }
-    100%{
-        opacity: 1;
-        scale: 1;
-    }
-}
-@keyframes translate-top{
-    0%{
-        opacity: 0;
-        transform: translateY(-70%);
 
-    }
-    100%{
-        opacity: 1;
-        transform: translateY(0%);
-        
-    }
-}
 /*home work*/
 .homework{}
 .homework__title{
@@ -902,3 +969,4 @@ padding: 0.5rem;
 .homework__item > i{
     -webkit-text-stroke: 1px;
 }
+
