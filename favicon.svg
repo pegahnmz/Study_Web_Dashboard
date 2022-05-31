@@ -1,0 +1,17 @@
+
+<svg height="18" width="18" style="scale:1" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- <path d="M 200 200 L 300 100 L 200 0 T 100 100 L 200 200"  fill="rgb(222,212,255)"/>
+        <path  d="M 100 200 L 200 100 L 100 0 T 0 100 L 100 200"  fill="rgb(138,112,214)"/> -->
+
+         <path d="M 12 15
+                  L 18 9 
+                  L 12 3 
+                  T 6 9 
+                  L 12 15"  fill="rgb(222,212,255)"/>
+        <path  d="M 6 15 
+                  L 12 9 
+                  L 6 3 
+                  T 0 9 
+                  L 6 15"  fill="rgb(138,112,214)"/>
+</svg>
